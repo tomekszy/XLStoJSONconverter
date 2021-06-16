@@ -16,9 +16,7 @@ var removeByAttr = function (arr, attr, value) {
         if (arr[i]
             && arr[i].hasOwnProperty(attr)
             && (arguments.length > 2 && arr[i][attr] === value)) {
-
             arr.splice(i, 1);
-
         }
     }
     return arr;
@@ -29,7 +27,7 @@ arrToSave.forEach(element => {
 });
 
 arrToSave.forEach(element => {
-    element.daneSpecyficzne = {
+    element.daneSpecyficzne = [{
         kolor: element.kolor,
         size: element.size,
         wysokosc: element.wysokosc,
@@ -37,7 +35,7 @@ arrToSave.forEach(element => {
         dlugosc: element.dlugosc,
         cenaDetalicznaNetto: element.cenaDetalicznaNetto,
         cenaDetalicznaBrutto: element.cenaDetalicznaBrutto,
-    }
+    }];
     delete element.kolor;
     delete element.size;
     delete element.wysokosc;
@@ -46,6 +44,19 @@ arrToSave.forEach(element => {
     delete element.cenaDetalicznaNetto;
     delete element.cenaDetalicznaBrutto;
 });
+
+var sorted = {};
+for (var i = 0, max = arrToSave.length; i < max; i++) {
+    if (sorted[arrToSave[i].itemNumber] == undefined) {
+        sorted[arrToSave[i].itemNumber] = [];
+    }
+    sorted[arrToSave[i].itemNumber].push(arrToSave[i]);
+}
+
+for (const key in sorted) {
+    console.log(key, sorted[key].length);
+    // tu zrobić, żeby tablica się redukowała
+}
 
 console.log("Liczba obiektów niezduplikowanych", warehouses.length);
 console.log("Liczba obiektów zduplikowanych", arrToSave.length);
