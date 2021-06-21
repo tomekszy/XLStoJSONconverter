@@ -2,8 +2,17 @@ const fs = require('fs');
 
 let rawwarehouses = fs.readFileSync('warehouses.json');
 let warehouses = JSON.parse(rawwarehouses);
-let warehousesOutput = []
 console.log("Liczba obiektów w pliku wejściowym", warehouses.length);
+
+warehouses.forEach(element => {
+    if (element.rodzajTowaru == 'Puchary') {
+        element.itemNumberDiv = element.itemNumber.split('/')
+        element.itemNumber = element.itemNumberDiv[0];
+        element.itemNumber2 = element.itemNumberDiv[1];
+        delete element.itemNumberDiv;
+    }
+})
+
 const lookup = warehouses.reduce((a, e) => {
     a[e.itemNumber] = ++a[e.itemNumber] || 0;
     return a;
@@ -26,8 +35,10 @@ arrToSave.forEach(element => {
     removeByAttr(warehouses, 'itemNumber', element.itemNumber)
 });
 
-arrToSave.forEach(element => {
+arrToSave.forEach((element, index) => {
+    // element.itemNumber = element.itemNumber + '/' + element.itemNumber2;
     element.daneSpecyficzne = [{
+        nazwaModelu: element.itemNumber2,
         kolor: element.kolor,
         size: element.size,
         wysokosc: element.wysokosc,
@@ -36,6 +47,7 @@ arrToSave.forEach(element => {
         cenaDetalicznaNetto: element.cenaDetalicznaNetto,
         cenaDetalicznaBrutto: element.cenaDetalicznaBrutto,
     }];
+    delete element.itemNumber2;
     delete element.kolor;
     delete element.size;
     delete element.wysokosc;
@@ -44,19 +56,6 @@ arrToSave.forEach(element => {
     delete element.cenaDetalicznaNetto;
     delete element.cenaDetalicznaBrutto;
 });
-
-var sorted = {};
-for (var i = 0, max = arrToSave.length; i < max; i++) {
-    if (sorted[arrToSave[i].itemNumber] == undefined) {
-        sorted[arrToSave[i].itemNumber] = [];
-    }
-    sorted[arrToSave[i].itemNumber].push(arrToSave[i]);
-}
-
-for (const key in sorted) {
-    console.log(key, sorted[key].length);
-    // tu zrobić, żeby tablica się redukowała
-}
 
 console.log("Liczba obiektów niezduplikowanych", warehouses.length);
 console.log("Liczba obiektów zduplikowanych", arrToSave.length);
