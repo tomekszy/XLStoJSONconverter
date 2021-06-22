@@ -47,6 +47,7 @@ arrToSave.forEach((element, index) => {
         cenaDetalicznaNetto: element.cenaDetalicznaNetto,
         cenaDetalicznaBrutto: element.cenaDetalicznaBrutto,
     }];
+    // delete element._id
     delete element.itemNumber2;
     delete element.kolor;
     delete element.size;
