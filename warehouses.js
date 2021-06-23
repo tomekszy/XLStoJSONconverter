@@ -5,13 +5,20 @@ let warehouses = JSON.parse(rawwarehouses);
 console.log("Liczba obiektów w pliku wejściowym", warehouses.length);
 
 warehouses.forEach(element => {
-    if (element.rodzajTowaru == 'Puchary') {
+    if (element.rodzajTowaru == 'Puchary' || 'Wstążki do medali') {
         element.itemNumberDiv = element.itemNumber.split('/')
         element.itemNumber = element.itemNumberDiv[0];
         element.itemNumber2 = element.itemNumberDiv[1];
         delete element.itemNumberDiv;
-        if (element.fullName.includes('/'))
+        if (element.fullName.includes('/')) {
             element.fullName = element.fullName.split('/')[0] + ' ' + element.fullName.split('/')[1].split(' ')[1];
+        }
+        if (element.fullName.includes('cm')) {
+            element.fullName = element.fullName.replace(/\d{1,2}cm/, '')
+        }
+        if (element.fullName.includes('mm')) {
+            element.fullName = element.fullName.replace(/\d{1,2}mm/, '')
+        }
     }
 })
 
@@ -38,7 +45,7 @@ arrToSave.forEach(element => {
 });
 
 arrToSave.forEach((element, index) => {
-    // element.itemNumber = element.itemNumber + '/' + element.itemNumber2;
+    element.idMagazynu = element._id
     element.daneSpecyficzne = [{
         nazwaModelu: element.itemNumber2,
         kolor: element.kolor,
@@ -48,8 +55,18 @@ arrToSave.forEach((element, index) => {
         dlugosc: element.dlugosc,
         cenaDetalicznaNetto: element.cenaDetalicznaNetto,
         cenaDetalicznaBrutto: element.cenaDetalicznaBrutto,
+        cenaExportEuro: element.cenaExportEuro,
+        liczba: element.liczba,
+        wartoscWmagazynieNetto: element.wartoscWmagazynieNetto,
+        cenaZakupuNetto: element.cenaZakupuNetto,
+        cenaDetalicznaWaluta: element.cenaDetalicznaWaluta,
+        vat: element.vat,
+        jednostka: element.jednostka,
+        towarOpis: element.towarOpis,
+        nazwaRozmiaru: element.nazwaRozmiaru,
+        jednostkaWymiaru: element.jednostkaWymiaru
     }];
-    // delete element._id
+    delete element._id
     delete element.itemNumber2;
     delete element.kolor;
     delete element.size;
@@ -58,6 +75,57 @@ arrToSave.forEach((element, index) => {
     delete element.dlugosc;
     delete element.cenaDetalicznaNetto;
     delete element.cenaDetalicznaBrutto;
+    delete liczba;
+    delete wartoscWmagazynieNetto;
+    delete cenaZakupuNetto;
+    delete cenaDetalicznaWaluta;
+    delete vat;
+    delete jednostka;
+    delete towarOpis;
+    delete nazwaRozmiaru;
+    delete jednostkaWymiaru;
+});
+
+warehouses.forEach((element, index) => {
+    element.idMagazynu = element._id
+    element.daneSpecyficzne = [{
+        nazwaModelu: element.itemNumber2,
+        kolor: element.kolor,
+        size: element.size,
+        wysokosc: element.wysokosc,
+        szerokosc: element.szerokosc,
+        dlugosc: element.dlugosc,
+        cenaDetalicznaNetto: element.cenaDetalicznaNetto,
+        cenaDetalicznaBrutto: element.cenaDetalicznaBrutto,
+        cenaExportEuro: element.cenaExportEuro,
+        liczba: element.liczba,
+        wartoscWmagazynieNetto: element.wartoscWmagazynieNetto,
+        cenaZakupuNetto: element.cenaZakupuNetto,
+        cenaDetalicznaWaluta: element.cenaDetalicznaWaluta,
+        vat: element.vat,
+        jednostka: element.jednostka,
+        towarOpis: element.towarOpis,
+        nazwaRozmiaru: element.nazwaRozmiaru,
+        jednostkaWymiaru: element.jednostkaWymiaru
+    }];
+    delete element._id
+    delete element.itemNumber2;
+    delete element.kolor;
+    delete element.size;
+    delete element.wysokosc;
+    delete element.szerokosc;
+    delete element.dlugosc;
+    delete element.cenaDetalicznaNetto;
+    delete element.cenaDetalicznaBrutto;
+    delete liczba;
+    delete wartoscWmagazynieNetto;
+    delete cenaZakupuNetto;
+    delete cenaDetalicznaWaluta;
+    delete vat;
+    delete jednostka;
+    delete towarOpis;
+    delete nazwaRozmiaru;
+    delete jednostkaWymiaru;
 });
 
 console.log("Liczba obiektów niezduplikowanych", warehouses.length);
