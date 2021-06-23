@@ -10,6 +10,8 @@ warehouses.forEach(element => {
         element.itemNumber = element.itemNumberDiv[0];
         element.itemNumber2 = element.itemNumberDiv[1];
         delete element.itemNumberDiv;
+        if (element.fullName.includes('/'))
+            element.fullName = element.fullName.split('/')[0] + ' ' + element.fullName.split('/')[1].split(' ')[1];
     }
 })
 
