@@ -47,7 +47,7 @@ arrToSave.forEach(element => {
 arrToSave.forEach((element, index) => {
     element.idMagazynu = element._id
     element.daneSpecyficzne = [{
-        nazwaModelu: element.itemNumber2,
+        nazwaRozmiaru: element.itemNumber2,
         kolor: element.kolor,
         size: element.size,
         wysokosc: element.wysokosc,
@@ -63,7 +63,6 @@ arrToSave.forEach((element, index) => {
         vat: element.vat,
         jednostka: element.jednostka,
         towarOpis: element.towarOpis,
-        nazwaRozmiaru: element.nazwaRozmiaru,
         jednostkaWymiaru: element.jednostkaWymiaru
     }];
     delete element._id
@@ -82,14 +81,13 @@ arrToSave.forEach((element, index) => {
     delete vat;
     delete jednostka;
     delete towarOpis;
-    delete nazwaRozmiaru;
     delete jednostkaWymiaru;
 });
 
 warehouses.forEach((element, index) => {
     element.idMagazynu = element._id
     element.daneSpecyficzne = [{
-        nazwaModelu: element.itemNumber2,
+        nazwaRozmiaru: element.itemNumber2,
         kolor: element.kolor,
         size: element.size,
         wysokosc: element.wysokosc,
@@ -105,7 +103,6 @@ warehouses.forEach((element, index) => {
         vat: element.vat,
         jednostka: element.jednostka,
         towarOpis: element.towarOpis,
-        nazwaRozmiaru: element.nazwaRozmiaru,
         jednostkaWymiaru: element.jednostkaWymiaru
     }];
     delete element._id
@@ -124,7 +121,6 @@ warehouses.forEach((element, index) => {
     delete vat;
     delete jednostka;
     delete towarOpis;
-    delete nazwaRozmiaru;
     delete jednostkaWymiaru;
 });
 
