@@ -10,19 +10,20 @@ warehouses.forEach(element => {
     rodzajeTowaru.push(element.rodzajTowaru);
     jednostki.push(element.jednostka);
     if (element.rodzajTowaru == 'Puchary' || 'Wstążki do medali') {
-        element.itemNumber = element.itemNumber.split('/')[0];
+        element.itemNumber1 = element.itemNumber.split('/')[0];
         element.itemNumber2 = element.itemNumber.split('/')[1];
         if (element.fullName.includes('/')) {
             element.fullName = element.fullName.split('/')[0] + ' ' + element.fullName.split('/')[1].split(' ')[1];
         }
         if (element.fullName.includes('cm')) {
-            element.fullName = element.fullName.replace(/\d{1,2}cm/, '')
+            element.fullName = element.fullName.replace(/\d{1,2}cm/, '');
         }
         if (element.fullName.includes('mm')) {
-            element.fullName = element.fullName.replace(/\d{1,2}mm/, '')
+            element.fullName = element.fullName.replace(/\d{1,2}mm/, '');
         }
     }
-    element.idMagazynu = element._id
+    element.idMagazynu = element._id;
+    element.itemNumber = element.itemNumber1;
     element.daneSpecyficzne = [{
         nazwaRozmiaru: element.itemNumber2,
         kolor: element.kolor,
@@ -42,7 +43,8 @@ warehouses.forEach(element => {
         towarOpis: element.towarOpis,
         jednostkaWymiaru: element.jednostkaWymiaru
     }];
-    delete element._id
+    delete element._id;
+    delete element.itemNumber1;
     delete element.itemNumber2;
     delete element.kolor;
     delete element.size;
@@ -80,7 +82,7 @@ var removeByAttr = function (arr, attr, value) {
     return arr;
 }
 arrToSave.forEach(element => {
-    removeByAttr(warehouses, 'itemNumber', element.itemNumber)
+    removeByAttr(warehouses, 'itemNumber', element.itemNumber);
 });
 
 const rodzajeTowaruUnique = [...new Set(rodzajeTowaru)];
@@ -90,6 +92,6 @@ console.log("Jednostki: ", jednostkiUnique);
 console.log("Liczba obiektów niezduplikowanych", warehouses.length);
 console.log("Liczba obiektów zduplikowanych", arrToSave.length);
 const duplicates = JSON.stringify(arrToSave);
-fs.writeFileSync('warehousesDuplicates.json', duplicates)
+fs.writeFileSync('warehousesDuplicates.json', duplicates);
 const nonDuplicates = JSON.stringify(warehouses);
-fs.writeFileSync('warehousesNonDuplicates.json', nonDuplicates)
+fs.writeFileSync('warehousesNonDuplicates.json', nonDuplicates);
