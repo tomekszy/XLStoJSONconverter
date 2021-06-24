@@ -41,6 +41,7 @@ warehouses.forEach(element => {
         vat: element.vat,
         jednostka: element.jednostka,
         towarOpis: element.towarOpis,
+        comments: element.comments,
         jednostkaWymiaru: element.jednostkaWymiaru
     }];
     delete element._id;
@@ -61,6 +62,7 @@ warehouses.forEach(element => {
     delete element.vat;
     delete element.jednostka;
     delete element.towarOpis;
+    delete element.comments;
     delete element.jednostkaWymiaru;
 });
 
