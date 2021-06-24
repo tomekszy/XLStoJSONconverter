@@ -1,12 +1,12 @@
 const fs = require('fs');
 var json2mongo = require('json2mongo');
 
-let rawwarehouseDup = fs.readFileSync('warehousesDuplicates.json');
-let rawwarehouseNonDup = fs.readFileSync('warehousesNonDuplicates.json');
-let warehouses = JSON.parse(rawwarehouseDup);
-let warehousesND = JSON.parse(rawwarehouseNonDup);
+const rawwarehouseDup = fs.readFileSync('warehousesDuplicates.json');
+const rawwarehouseNonDup = fs.readFileSync('warehousesNonDuplicates.json');
+const warehouses = JSON.parse(rawwarehouseDup);
+const warehousesND = JSON.parse(rawwarehouseNonDup);
 console.log("Liczba obiektów w pliku wejściowym", warehouses.length);
-let elementyDoZapisu = [];
+const elementyDoZapisu = [];
 
 warehouses.forEach(elementWyzej => {
     let daneSpecyficzne = [];
@@ -24,14 +24,14 @@ warehouses.forEach(elementWyzej => {
 
 const uniqueWarehouses = Array.from(new Set(elementyDoZapisu.map(a => a.itemNumber)))
     .map(itemNumber => {
-        return elementyDoZapisu.find(a => a.itemNumber === itemNumber)
-    })
+        return elementyDoZapisu.find(a => a.itemNumber === itemNumber);
+    });
 
-let warehousesOutput = uniqueWarehouses
+const warehousesOutput = uniqueWarehouses;
 console.log("Liczba obiektów po redukcji", warehousesOutput.length);
 warehousesSave = warehousesOutput.concat(warehousesND);
 console.log("Liczba obiektów wraz z nieduplikowanymi", warehousesSave.length);
 const output = JSON.stringify(json2mongo(warehousesSave));
-fs.writeFileSync('warehousesOutput.json', output)
+fs.writeFileSync('warehousesOutput.json', output);
 
 

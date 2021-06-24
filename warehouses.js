@@ -1,7 +1,7 @@
 const fs = require('fs');
 
-let rawwarehouses = fs.readFileSync('warehouses.json');
-let warehouses = JSON.parse(rawwarehouses);
+const rawwarehouses = fs.readFileSync('warehouses.json');
+const warehouses = JSON.parse(rawwarehouses);
 console.log("Liczba obiektów w pliku wejściowym", warehouses.length);
 const rodzajeTowaru = [];
 const jednostki = [];
@@ -10,10 +10,8 @@ warehouses.forEach(element => {
     rodzajeTowaru.push(element.rodzajTowaru);
     jednostki.push(element.jednostka);
     if (element.rodzajTowaru == 'Puchary' || 'Wstążki do medali') {
-        element.itemNumberDiv = element.itemNumber.split('/')
-        element.itemNumber = element.itemNumberDiv[0];
-        element.itemNumber2 = element.itemNumberDiv[1];
-        delete element.itemNumberDiv;
+        element.itemNumber = element.itemNumber.split('/')[0];
+        element.itemNumber2 = element.itemNumber.split('/')[1];
         if (element.fullName.includes('/')) {
             element.fullName = element.fullName.split('/')[0] + ' ' + element.fullName.split('/')[1].split(' ')[1];
         }
@@ -53,21 +51,22 @@ warehouses.forEach(element => {
     delete element.dlugosc;
     delete element.cenaDetalicznaNetto;
     delete element.cenaDetalicznaBrutto;
-    delete liczba;
-    delete wartoscWmagazynieNetto;
-    delete cenaZakupuNetto;
-    delete cenaDetalicznaWaluta;
-    delete vat;
-    delete jednostka;
-    delete towarOpis;
-    delete jednostkaWymiaru;
-})
+    delete element.cenaExportEuro;
+    delete element.liczba;
+    delete element.wartoscWmagazynieNetto;
+    delete element.cenaZakupuNetto;
+    delete element.cenaDetalicznaWaluta;
+    delete element.vat;
+    delete element.jednostka;
+    delete element.towarOpis;
+    delete element.jednostkaWymiaru;
+});
 
 const lookup = warehouses.reduce((a, e) => {
     a[e.itemNumber] = ++a[e.itemNumber] || 0;
     return a;
 }, {});
-const arrToSave = warehouses.filter(e => lookup[e.itemNumber])
+const arrToSave = warehouses.filter(e => lookup[e.itemNumber]);
 
 var removeByAttr = function (arr, attr, value) {
     var i = arr.length;
