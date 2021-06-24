@@ -80,7 +80,6 @@ var removeByAttr = function (arr, attr, value) {
     }
     return arr;
 }
-
 arrToSave.forEach(element => {
     removeByAttr(warehouses, 'itemNumber', element.itemNumber)
 });
