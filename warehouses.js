@@ -21,29 +21,29 @@ warehouses.forEach(element => {
         if (element.fullName.includes('mm')) {
             element.fullName = element.fullName.replace(/\d{1,2}mm/, '');
         }
+        element.daneSpecyficzne = [{
+            nazwaRozmiaru: element.itemNumber,
+            kolor: element.kolor,
+            size: element.size,
+            wysokosc: element.wysokosc,
+            szerokosc: element.szerokosc,
+            dlugosc: element.dlugosc,
+            cenaDetalicznaNetto: element.cenaDetalicznaNetto,
+            cenaDetalicznaBrutto: element.cenaDetalicznaBrutto,
+            cenaExportEuro: element.cenaExportEuro,
+            liczba: element.liczba,
+            wartoscWmagazynieNetto: element.wartoscWmagazynieNetto,
+            cenaZakupuNetto: element.cenaZakupuNetto,
+            cenaDetalicznaWaluta: element.cenaDetalicznaWaluta,
+            vat: element.vat,
+            jednostka: element.jednostka,
+            towarOpis: element.towarOpis,
+            comments: element.comments,
+            jednostkaWymiaru: element.jednostkaWymiaru
+        }];
     }
     element.idMagazynu = element._id;
     element.itemNumber = element.itemNumber1;
-    element.daneSpecyficzne = [{
-        nazwaRozmiaru: element.itemNumber2,
-        kolor: element.kolor,
-        size: element.size,
-        wysokosc: element.wysokosc,
-        szerokosc: element.szerokosc,
-        dlugosc: element.dlugosc,
-        cenaDetalicznaNetto: element.cenaDetalicznaNetto,
-        cenaDetalicznaBrutto: element.cenaDetalicznaBrutto,
-        cenaExportEuro: element.cenaExportEuro,
-        liczba: element.liczba,
-        wartoscWmagazynieNetto: element.wartoscWmagazynieNetto,
-        cenaZakupuNetto: element.cenaZakupuNetto,
-        cenaDetalicznaWaluta: element.cenaDetalicznaWaluta,
-        vat: element.vat,
-        jednostka: element.jednostka,
-        towarOpis: element.towarOpis,
-        comments: element.comments,
-        jednostkaWymiaru: element.jednostkaWymiaru
-    }];
     delete element._id;
     delete element.itemNumber1;
     delete element.itemNumber2;
