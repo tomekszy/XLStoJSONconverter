@@ -10,8 +10,8 @@ xlsxj({
         console.log(result);
     }
 });
-const rawkontrahenci = fs.readFileSync('kontrahenciInput.json');
-const kontrahenci = JSON.parse(rawkontrahenci);
+const rawkontrahenci = fs.readFileSync('kontrahenciInput.json').toString();
+var kontrahenci = JSON.parse(rawkontrahenci.replace(/\s/g, ''));
 console.log("Liczba obiektów w pliku wejściowym", kontrahenci.length);
 
 kontrahenci.forEach(element => {
