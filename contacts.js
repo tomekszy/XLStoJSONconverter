@@ -61,6 +61,13 @@ kontrahenci.forEach(element => {
       element.znizkaGrupy.push({ nazwaGrupy: 'Etui', procentZnizki: Number(element.upustetuiprocent) })
   }
 
+  if (element.blachaCenaPLN)
+    element.znizkaTowary.push({ idTowaru: 'idblachaCenaPLN', nazwaTowaru: 'nazwa blachy netto', wartoscZnizki: Number(element.blachaCenaPLN) })
+  if (element.Tgcena)
+    element.znizkaTowary.push({ idTowaru: 'idTgcena', nazwaTowaru: 'nazwa tabliczki grawerowanej za centymetr', wartoscZnizki: Number(element.Tgcena) })
+  if (element.LAK36mmcena)
+    element.znizkaTowary.push({ idTowaru: 'idLAK36mmcena', nazwaTowaru: 'nazwa LAK 36 mm', wartoscZnizki: Number(element.LAK36mmcena) })
+
   if (element.wstazkaV2cena)
     element.znizkaTowary.push({ idTowaru: 'idWstazkiV2', nazwaTowaru: 'nazwa wstążki V2', wartoscZnizki: Number(element.wstazkaV2cena) })
   if (element.wstazkaV8cena)
@@ -73,6 +80,9 @@ kontrahenci.forEach(element => {
   delete element.upustwstazkiprocent;
   delete element.upustodlewyprocent;
   delete element.upustetuiprocent;
+  delete element.blachaCenaPLN;
+  delete element.Tgcena;
+  delete element.LAK36mmcena;
   delete element.wstazkaV2cena;
   delete element.wstazkaV8cena;
   delete element.acName1;
