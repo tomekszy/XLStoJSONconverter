@@ -2,7 +2,7 @@ const fs = require('fs');
 xlsxj = require("xlsx-to-json");
 xlsxj({
   input: "kontrahenci.xlsx",
-  output: "kontrahenciInput.json"
+  output: "contractorsInput.json"
 }, function (err, result) {
   if (err) {
     console.error(err);
@@ -10,12 +10,13 @@ xlsxj({
     console.log(result);
   }
 });
-const rawkontrahenci = fs.readFileSync('kontrahenciInput.json').toString();
+const rawkontrahenci = fs.readFileSync('contractorsInput.json').toString();
 var kontrahenci = JSON.parse(rawkontrahenci);
 // .replace(/\s/g, ''));
 console.log("Liczba obiektów w pliku wejściowym", kontrahenci.length);
 
 kontrahenci.forEach(element => {
+  element.contrType = 'klient';
   element.paymentDeadline = Number(element.paymentDeadline);
   element.creditLimit = Number(element.creditLimit);
   element.winnyKase = Boolean(element.winnyKase);
@@ -101,4 +102,4 @@ kontrahenci.forEach(element => {
 
 console.log("Liczba obiektów", kontrahenci.length);
 const output = JSON.stringify(kontrahenci);
-fs.writeFileSync('kontrahenciOutput.json', output);
+fs.writeFileSync('contractors.json', output);
