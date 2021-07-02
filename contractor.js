@@ -54,25 +54,26 @@ kontrahenci.forEach(element => {
       element.znizkaGrupy.push({ nazwaGrupy: 'Medale', procentZnizki: Number(element.upustmedaleprocent) })
     if (element.upuststatuetkiplastikoweprocent)
       element.znizkaGrupy.push({ nazwaGrupy: 'Statuetki plastikowe', procentZnizki: Number(element.upuststatuetkiplastikoweprocent) })
-    if (element.upustwstazkiprocent)
-      element.znizkaGrupy.push({ nazwaGrupy: 'Wstążki', procentZnizki: Number(element.upustwstazkiprocent) })
+    if (element.upustwstazkiprocent) {
+      element.znizkaGrupy.push({ nazwaGrupy: 'Wstążki do medali 1cm', procentZnizki: Number(element.upustwstazkiprocent) })
+      element.znizkaGrupy.push({ nazwaGrupy: 'Wstążki do medali 2cm', procentZnizki: Number(element.upustwstazkiprocent) })
+    }
     if (element.upustodlewyprocent)
       element.znizkaGrupy.push({ nazwaGrupy: 'Odlewy', procentZnizki: Number(element.upustodlewyprocent) })
     if (element.upustetuiprocent)
-      element.znizkaGrupy.push({ nazwaGrupy: 'Etui', procentZnizki: Number(element.upustetuiprocent) })
+      element.znizkaGrupy.push({ nazwaGrupy: 'Etui do medali', procentZnizki: Number(element.upustetuiprocent) })
   }
 
   if (element.blachaCenaPLN)
-    element.znizkaTowary.push({ idTowaru: 'idblachaCenaPLN', nazwaTowaru: 'nazwa blachy netto', wartoscZnizki: Number(element.blachaCenaPLN) })
+    element.znizkaGrupy.push({ nazwaGrupy: 'Blachy', wartoscZnizki: Number(element.blachaCenaPLN) }) //grupa towarowa
   if (element.Tgcena)
-    element.znizkaTowary.push({ idTowaru: 'idTgcena', nazwaTowaru: 'nazwa tabliczki grawerowanej za centymetr', wartoscZnizki: Number(element.Tgcena) })
+    element.znizkaTowary.push({ idTowaru: '60dee39acf63d32864fe1406', nazwaTowaru: 'Tabliczka grawerowana za centymetr', wartoscZnizki: Number(element.Tgcena) }) //tabl grawerowana
   if (element.LAK36mmcena)
-    element.znizkaTowary.push({ idTowaru: 'idLAK36mmcena', nazwaTowaru: 'nazwa LAK 36 mm', wartoscZnizki: Number(element.LAK36mmcena) })
-
+    element.znizkaTowary.push({ idTowaru: '60dee36bcf63d32864fe1405', nazwaTowaru: 'nadruk medal 3,6cm', wartoscZnizki: Number(element.LAK36mmcena) }) //nadruk
   if (element.wstazkaV2cena)
-    element.znizkaTowary.push({ idTowaru: 'idWstazkiV2', nazwaTowaru: 'nazwa wstążki V2', wartoscZnizki: Number(element.wstazkaV2cena) })
+    element.znizkaGrupy.push({ nazwaGrupy: 'Wstążki do medali 2cm', wartoscZnizki: Number(element.wstazkaV2cena) }) //wstążki 2cm - grupa tow
   if (element.wstazkaV8cena)
-    element.znizkaTowary.push({ idTowaru: 'idWstazkiV8', nazwaTowaru: 'nazwa wstążki V8', wartoscZnizki: Number(element.wstazkaV8cena) })
+    element.znizkaGrupy.push({ nazwaGrupy: 'Wstążki do medali 1cm', wartoscZnizki: Number(element.wstazkaV8cena) }) //wstążki 1cm - grupa tow
 
   delete element.upustdocalosciprocent;
   delete element.upustpucharyprocent;

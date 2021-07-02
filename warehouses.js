@@ -9,7 +9,14 @@ const jednostki = [];
 warehouses.forEach(element => {
     rodzajeTowaru.push(element.rodzajTowaru);
     jednostki.push(element.jednostka);
+
     if (element.rodzajTowaru == 'Puchary' || 'Wstążki do medali') {
+        if (element.rodzajTowaru == 'Wstążki do medali') {
+            if (element.fullName.includes('1cm'))
+                element.rodzajTowaru = 'Wstążki do medali 1cm'
+            if (element.fullName.includes('2cm'))
+                element.rodzajTowaru = 'Wstążki do medali 2cm'
+        }
         element.itemNumber1 = element.itemNumber.split('/')[0];
         element.itemNumber2 = element.itemNumber.split('/')[1];
         if (element.fullName.includes('/')) {

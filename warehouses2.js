@@ -32,6 +32,6 @@ console.log("Liczba obiektów po redukcji", warehousesOutput.length);
 warehousesSave = warehousesOutput.concat(warehousesND);
 console.log("Liczba obiektów wraz z nieduplikowanymi", warehousesSave.length);
 const output = JSON.stringify(json2mongo(warehousesSave));
-fs.writeFileSync('warehousesOutput.json', output);
+fs.writeFileSync('sklep.json', output);
 
 
