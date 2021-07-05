@@ -7,27 +7,36 @@ const rodzajeTowaru = [];
 const jednostki = [];
 
 warehouses.forEach(element => {
+
     rodzajeTowaru.push(element.rodzajTowaru);
     jednostki.push(element.jednostka);
+    element.wstazka1cm = false;
+    element.wstazka2cm = false;
 
     if (element.rodzajTowaru == 'Puchary' || 'Wstążki do medali') {
         if (element.rodzajTowaru == 'Wstążki do medali') {
-            if (element.fullName.includes('1cm'))
+            if (element.fullName.includes('1cm')) {
                 element.rodzajTowaru = 'Wstążki do medali 1cm'
-            if (element.fullName.includes('2cm'))
+                element.wstazka1cm = true;
+            }
+            if (element.fullName.includes('2cm')) {
                 element.rodzajTowaru = 'Wstążki do medali 2cm'
+                element.wstazka2cm = true;
+            }
         }
+
         element.itemNumber1 = element.itemNumber.split('/')[0];
         element.itemNumber2 = element.itemNumber.split('/')[1];
         if (element.fullName.includes('/')) {
             element.fullName = element.fullName.split('/')[0] + ' ' + element.fullName.split('/')[1].split(' ')[1];
         }
-        if (element.fullName.includes('cm')) {
-            element.fullName = element.fullName.replace(/\d{1,2}cm/, '');
-        }
+        // if (element.fullName.includes('cm')) {
+        //     element.fullName = element.fullName.replace(/\d{1,2}cm/, '');
+        // }
         if (element.fullName.includes('mm')) {
             element.fullName = element.fullName.replace(/\d{1,2}mm/, '');
         }
+
         element.daneSpecyficzne = [{
             nazwaRozmiaru: element.itemNumber,
             kolor: element.kolor,
@@ -49,6 +58,7 @@ warehouses.forEach(element => {
             jednostkaWymiaru: element.jednostkaWymiaru
         }];
     }
+
     element.idMagazynu = element._id;
     element.itemNumber = element.itemNumber1;
     delete element._id;
