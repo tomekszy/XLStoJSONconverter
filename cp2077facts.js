@@ -1,16 +1,19 @@
 const fs = require('fs');
 
-let rawfile = fs.readFileSync('cp2077facts.json');
+// let keyName = 'FactName'
+let keyName = 'Key'
+let inputFileName = 'cp2077facts-1471'
+let rawfile = fs.readFileSync(inputFileName + '.json');
 let parse = JSON.parse(rawfile);
 let outputJson = []
 let outputTxt = []
 
 parse.forEach(element => {
     if (
-        element['Key'].includes('sq012') ||
-        element['Key'].includes('sq021') ||
-        element['Key'].includes('river') ||
-        element['Key'].includes('randy')
+        element[keyName].includes('sq012') ||
+        element[keyName].includes('sq021') ||
+        element[keyName].includes('river') ||
+        element[keyName].includes('randy')
     ) {
         outputJson.push(element);
     }
@@ -24,5 +27,5 @@ const data = JSON.stringify(outputJson);
 const data2 = outputTxt.toString()
 console.log("Liczba obiektów w pliku wejściowym", parse.length);
 console.log("Liczba obiektów w pliku wyjściowym", outputJson.length);
-fs.writeFileSync('cp2077facts.output.json', data)
-fs.writeFileSync('cp2077facts.output.txt', data2)
+fs.writeFileSync(inputFileName + '.output.json', data)
+fs.writeFileSync(inputFileName + '.output.txt', data2)
